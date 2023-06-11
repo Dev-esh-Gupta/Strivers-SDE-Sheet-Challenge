@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	pair<int,int> res;
+	sort(arr.begin(),arr.end());
+	int k = 1;
+	for(int i=0; i<n-1; i++){
+		if(arr[i] == arr[i+1]){
+			res.second = arr[i];
+			arr[i+1] = -1;
+			break;
+		}
+	}
+	for(int i=0; i<n; i++){
+		if(arr[i]  == -1){
+			continue;
+		}
+		if(arr[i] == k){
+			k++;
+		}else {
+			res.first = k;
+			break;
+		}
+	}
+	if(arr[n-1] != k)
+		res.first = k;
+	
+	return res;
+	
+}

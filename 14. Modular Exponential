@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int modularExponentiation(int x, int n, int m) {
+
+	long long res = x;
+	// set<int> v;
+	// vector<int> resVector;
+	if(n == 1){
+		return res%m;
+	}
+//	int count = 0;
+	for(int i=1; i<n; i++){
+		res = res % m;
+        // if (v.count(res) == 0) {
+        //     count++;
+        //     v.insert(res);
+		// 	resVector.push_back(res);
+        // }else{
+		// 	break;
+		// }
+		res *= x;
+	}
+	// if(n+1 > count)
+	// return resVector[(n+1)%count];
+	// else
+	return res%m;
+}
+
+int main(){
+	cout<<modularExponentiation(5,125,7);
+}

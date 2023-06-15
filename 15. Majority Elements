@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int findMajorityElement(int arr[], int n) {
+	if(n == 1)
+		return arr[0];
+	sort(arr,arr+n);
+	int val = arr[0];
+	int count = 1;
+	for(int i=1; i<n; i++){
+		if(val == arr[i]){
+			count++;
+		}else{
+			count = 1;
+			val = arr[i];
+		}
+		if( count > floor(n/2)){
+			return arr[i];
+		}
+	}
+	return -1;
+}
+
+int main(){
+	int arr[] = {2,4,5,1,9,2,2,3,2,2};
+	cout<<findMajorityElement(arr,10);
+}

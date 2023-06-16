@@ -1,0 +1,23 @@
+// Here Main logic code is there
+
+bool detectCycle(Node *head)
+{
+    Node* slow;
+    Node* fast;
+    slow = head;
+    if(slow->next == NULL){
+        return false;
+    }
+    fast = head->next;
+    while(slow != NULL){
+        slow = slow->next;
+        if(fast->next != NULL && fast->next->next != NULL)
+            fast = fast->next->next;
+        else
+            break;
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}

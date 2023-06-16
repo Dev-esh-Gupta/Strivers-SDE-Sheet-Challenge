@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int lengthOfLongestConsecutiveSequence(vector<int> &arr, int n) {
+    sort(arr.begin(), arr.end());
+    int val = arr[0];
+    int count = 1;
+    int max = 1;
+    for(int i=1; i<arr.size(); i++){
+        if(val + count - 1 == arr[i]){
+            continue;
+        }
+        if(val + count == arr[i]){
+            count++;
+        }else{
+            count = 1;
+            val = arr[i];
+        }
+        if(count > max){
+            max = count;
+        }
+    }
+    return max;
+}
+
+int main(){
+	vector<int> arr = {33, 20, 34, 30, 35};
+	int size = 5;
+	cout<<lengthOfLongestConsecutiveSequence(arr,size);
+}

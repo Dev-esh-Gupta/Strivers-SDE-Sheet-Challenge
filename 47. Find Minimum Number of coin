@@ -1,0 +1,19 @@
+#include <bits/stdc++.h> 
+using namespace std;
+
+int findMinimumCoins(int amount) 
+{
+    int minDenom = 0;
+    int arr[] = {1000,500,100,50,20,10,5,2,1};
+    int i = 0;
+    while(amount != 0){
+        minDenom += amount/arr[i];
+        amount = amount - (amount/arr[i])*arr[i];
+        i++;
+    }
+    return minDenom;
+}
+
+int main(){
+	cout<<"Minimum number of coin " << findMinimumCoins(273);
+}

@@ -1,0 +1,54 @@
+/*
+ * Definition for linked list.
+ * class Node {
+ *  public:
+ *		int data;
+ *		Node *next;
+ * 		Node *random;
+ *		Node() : data(0), next(nullptr), random(nullptr){};
+ *		Node(int x) : data(x), next(nullptr), random(nullptr) {}
+ *		Node(int x, Node *next, Node *random) : data(x), next(next), random(random) {}
+ * };
+ */
+ #include<unordered_map>
+ void insertAtTail(Node* &head,Node* &tail, int d){
+	 Node* newNode = new Node(d);
+	 if(head == NULL){
+		 head = newNode;
+		 tail = newNode;
+	 }else{
+		 tail->next = newNode;
+		 tail = newNode;
+	 }
+	 return ;
+ }
+
+Node *cloneLL(Node *head){
+	Node* cloneHead = NULL;
+        Node* cloneTail = NULL;
+        
+        Node* temp = head;
+        while(temp != NULL){
+            insertAtTail(cloneHead,cloneTail,temp->data);
+            temp = temp->next;
+        }
+        
+        unordered_map<Node*, Node*> oldToNewMapping;
+        Node* oldNode = head;
+        Node* cloneNode = cloneHead;
+        while(oldNode != NULL){
+            oldToNewMapping[oldNode] = cloneNode;
+            oldNode = oldNode->next;
+            cloneNode = cloneNode->next;
+        }
+        
+        oldNode = head;
+        cloneNode = cloneHead;
+        // giving random mapping
+        while(oldNode != NULL){
+            cloneNode->random = oldToNewMapping[oldNode->random];
+            oldNode = oldNode->next;
+            cloneNode = cloneNode->next;
+        }
+        return cloneHead;
+}

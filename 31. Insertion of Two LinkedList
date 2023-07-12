@@ -1,0 +1,46 @@
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node()
+            {
+                this->data = 0;
+                next = NULL;
+            }
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+            Node(int data, Node* next)
+            {
+                this->data = data;
+                this->next = next;
+            }
+        };
+
+*****************************************************************/
+#include<unordered_map>
+Node* findIntersection(Node *firstHead, Node *secondHead)
+{
+    unordered_map<Node*, bool> checkMap;
+    while(firstHead != NULL){
+        checkMap[firstHead] = true;
+        firstHead = firstHead->next;
+    }
+    Node* result = NULL;
+    while(secondHead != NULL){
+        if(checkMap[secondHead] == true){
+            result = secondHead;
+            break;
+        }
+        checkMap[secondHead] = true;
+        secondHead = secondHead->next;
+    }
+    return result;
+}

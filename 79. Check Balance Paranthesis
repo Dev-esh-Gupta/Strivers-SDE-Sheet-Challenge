@@ -1,0 +1,24 @@
+bool isValidParenthesis(string expression)
+{
+    stack<char> st;
+
+    for(int i=0; i<expression.length(); i++){
+        if(expression[i] == '(' || expression[i] == '{' || expression[i] == '['){
+            st.push(expression[i]);
+        }else{
+            if(!st.empty()){
+                if(expression[i] == st.top()+1 || expression[i] == st.top()+2){
+                    st.pop();
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+    if(st.empty())
+    return true;
+    else
+    return false;
+}

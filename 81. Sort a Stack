@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+void insertInSortedOrder(stack<int> &stack, int element){
+	if(stack.empty() || stack.top() <= element){
+		stack.push(element);
+		return;
+	}
+
+	int val = stack.top();
+	stack.pop();
+
+	insertInSortedOrder(stack,element);
+
+	stack.push(val);
+}
+
+void sortStack(stack<int> &stack)
+{
+	if(stack.empty()){
+		return;
+	}
+
+	int val = stack.top();
+	stack.pop();
+
+	sortStack(stack);
+
+	insertInSortedOrder(stack,val);
+}

@@ -1,0 +1,31 @@
+void solve(vector<int> &num, vector<int> &res, vector<int> temp, int index){
+	if(index == num.size()){
+		int sum = 0;
+		for(int i=0; i<temp.size(); i++){
+			sum += temp[i];
+		}
+		res.push_back(sum);
+		return;
+	}
+
+	// taking element
+	temp.push_back(num[index]);
+
+	solve(num,res,temp,index+1);
+
+	// not taking 
+	temp.pop_back();
+
+	solve(num,res,temp,index+1);
+
+
+}
+vector<int> subsetSum(vector<int> &num){
+	vector<int> res;
+	int sum = 0;
+	vector<int> temp;
+	int index = 0;
+	solve(num, res, temp, index);
+	sort(res.begin(),res.end());
+	return res;	
+}

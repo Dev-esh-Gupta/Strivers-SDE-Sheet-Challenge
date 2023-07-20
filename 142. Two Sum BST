@@ -1,0 +1,42 @@
+#include <bits/stdc++.h> 
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+    
+};
+***************/
+void solve(BinaryTreeNode<int>* root, vector<int> &inorderValues){
+    if(root==NULL){
+        return;
+    }
+    solve(root->left,inorderValues);
+    inorderValues.push_back(root->data);
+    solve(root->right,inorderValues);
+}
+bool twoSumInBST(BinaryTreeNode<int>* root, int target) {
+	vector<int> inorderValues;
+    solve(root,inorderValues); // inorder traversal
+    int s = 0;
+    int e = inorderValues.size() - 1;
+    while(s < e){
+        if(inorderValues[s] + inorderValues[e] == target){
+            return true;
+        }else
+        if(inorderValues[s] + inorderValues[e] > target){
+            e--;
+        }else{
+            s++;
+        }
+    }
+    return false;
+}

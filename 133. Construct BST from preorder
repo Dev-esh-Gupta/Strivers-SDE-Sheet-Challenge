@@ -1,0 +1,44 @@
+#include <bits/stdc++.h> 
+/*
+    Following is the class structure of BinaryTreeNode class for referance:
+
+    class BinaryTreeNode {
+       public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+
+        ~BinaryTreeNode() {
+            if (left){
+                delete left;
+            }
+            if (right){
+                delete right;
+            }
+        }
+    };
+*/
+BinaryTreeNode<int>* inorderToBST(int s, int e, vector<int> inValues){
+    if(s>e){
+        return NULL;
+    }
+
+    int mid = (s+e)/2;
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(inValues[mid]);
+    root->left = inorderToBST(s,mid-1,inValues);
+    root->right = inorderToBST(mid+1,e,inValues);
+    return root;
+
+}
+
+BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
+   // sorting it for inorder
+   sort(preorder.begin(),preorder.end());
+   return inorderToBST(0,preorder.size()-1,preorder);
+}

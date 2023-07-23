@@ -1,0 +1,40 @@
+void dfs(int node, vector<int> &component,unordered_map<int,bool> &visited,
+ unordered_map<int,list<int>> &adj ){
+     // pushing value
+     component.push_back(node);
+     // marking visited
+     visited[node] = 1;
+
+
+     for(auto i: adj[node]){
+         if(!visited[i]){
+             dfs(i, component, visited, adj);
+         }
+     }
+ }
+
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+{
+    // creating adjacency list
+    unordered_map<int,list<int>> adj;
+    for(int i=0; i<edges.size(); i++){
+        int u = edges[i][0];
+        int v = edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    // creating visited map
+    vector<vector<int>> ans;
+    unordered_map<int,bool> visited;
+    for(int i=0; i<V; i++){
+        if(!visited[i]){
+            vector<int> component;
+            dfs(i,component,visited,adj);
+            ans.push_back(component);
+        }
+    }
+
+    return ans;
+}
